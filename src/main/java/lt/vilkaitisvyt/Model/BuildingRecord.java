@@ -1,9 +1,12 @@
 package lt.vilkaitisvyt.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class BuildingRecord {
@@ -11,18 +14,24 @@ public class BuildingRecord {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private String adress;
-	private String owner;
-	private Integer size;
+	private String adress;	
+	@ManyToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(referencedColumnName = "id")
+	private Owner owner;
+	private Integer sizeInSquareMeters;
 	private Double marketValue;
 	private String propertyType;
 	
 	
-	public BuildingRecord(String adress, String owner, Integer size, Double marketValue, String propertyType) {
+	public BuildingRecord() {
+		
+	}
+	
+	public BuildingRecord(String adress, Owner owner, Integer sizeInSquareMeters, Double marketValue, String propertyType) {
 		super();
 		this.adress = adress;
 		this.owner = owner;
-		this.size = size;
+		this.sizeInSquareMeters = sizeInSquareMeters;
 		this.marketValue = marketValue;
 		this.propertyType = propertyType;
 	}
@@ -38,23 +47,23 @@ public class BuildingRecord {
 	}
 
 
-	public String getOwner() {
+	public Owner getOwner() {
 		return owner;
 	}
 
 
-	public void setOwner(String owner) {
+	public void setOwner(Owner owner) {
 		this.owner = owner;
 	}
 
 
 	public Integer getSize() {
-		return size;
+		return sizeInSquareMeters;
 	}
 
 
-	public void setSize(Integer size) {
-		this.size = size;
+	public void setSize(Integer sizeInSquareMeters) {
+		this.sizeInSquareMeters = sizeInSquareMeters;
 	}
 
 
