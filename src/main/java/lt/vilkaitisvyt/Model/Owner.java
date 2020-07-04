@@ -1,19 +1,47 @@
 package lt.vilkaitisvyt.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
+import lt.vilkaitisvyt.Util.View;
 
 @Entity
 public class Owner {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonView(View.Summary.class)
 	private Long id;
+	
+	@NotBlank(message="First name cannot be missing or empty")
+    @Size(min=2, message="First name must not be less than 2 characters")
+	@JsonView(View.Summary.class)
 	private String firstName;
+	
+	@NotBlank(message="Last name cannot be missing or empty")
+    @Size(min=2, message="Last name must not be less than 2 characters")
+	@JsonView(View.Summary.class)
 	private String lastName;
+	
+	@Email
+	@JsonView(View.Summary.class)
 	private String email;
+	
+	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<BuildingRecord> buildingRecords = new ArrayList<>();
 	
 	
 	public Owner () {
@@ -53,5 +81,25 @@ public class Owner {
 
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<BuildingRecord> getBuildingRecords() {
+		return buildingRecords;
+	}
+
+	public void setBuildingRecords(List<BuildingRecord> buildingRecords) {
+		this.buildingRecords = buildingRecords;
+		for(BuildingRecord record : buildingRecords) {
+			record.setOwner(this);
+		}
+	}
+
+	@Override
+	public String toString() {
+		return "Owner {id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "}";
 	}
 }
