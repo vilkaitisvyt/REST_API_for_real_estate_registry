@@ -14,32 +14,27 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import lt.vilkaitisvyt.Util.View;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Owner {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(View.Summary.class)
 	private Long id;
 	
 	@NotBlank(message="First name cannot be missing or empty")
     @Size(min=2, message="First name must not be less than 2 characters")
-	@JsonView(View.Summary.class)
 	private String firstName;
 	
 	@NotBlank(message="Last name cannot be missing or empty")
     @Size(min=2, message="Last name must not be less than 2 characters")
-	@JsonView(View.Summary.class)
 	private String lastName;
 	
 	@Email
-	@JsonView(View.Summary.class)
 	private String email;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<BuildingRecord> buildingRecords = new ArrayList<>();
 	

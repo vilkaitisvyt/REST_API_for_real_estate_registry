@@ -12,41 +12,31 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
-import lt.vilkaitisvyt.Util.View;
-
 @Entity
 public class BuildingRecord {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@JsonView(View.Summary.class)
 	private Long id;
 	
 	@NotBlank(message="Adress cannot be missing or empty")
     @Size(min=2, message="Adress must not be less than 2 characters")
-	@JsonView(View.Summary.class)
 	private String adress;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "owner_id")
-	@JsonView(View.Summary.class)
 	private Owner owner;
 	
 	@Min(1)
 	@NotNull(message="Size cannot be missing or empty")
-	@JsonView(View.Summary.class)
 	private Integer sizeInSquareMeters;
 	
 	@Min(0)
 	@NotNull(message="Value cannot be missing or empty")
-	@JsonView(View.Summary.class)
 	private Double marketValue;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "propertyType_id")
-	@JsonView(View.Summary.class)
 	private PropertyType propertyType;
 	
 	
