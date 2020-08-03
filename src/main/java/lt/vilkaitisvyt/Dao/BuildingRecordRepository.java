@@ -1,4 +1,4 @@
-package lt.vilkaitisvyt.Repository;
+package lt.vilkaitisvyt.Dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

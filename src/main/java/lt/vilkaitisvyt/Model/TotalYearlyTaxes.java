@@ -1,23 +1,25 @@
 package lt.vilkaitisvyt.Model;
 
+import java.math.BigDecimal;
+
 public class TotalYearlyTaxes {
 	
-	private Double totalTaxes;
+	private BigDecimal totalTaxes;
 	
 	public TotalYearlyTaxes() {
 		
 	}
 
-	public TotalYearlyTaxes(Double totalTaxes) {
+	public TotalYearlyTaxes(BigDecimal totalTaxes) {
 		super();
 		this.totalTaxes = totalTaxes;
 	}
 
-	public Double getTotalTaxes() {
+	public BigDecimal getTotalTaxes() {
 		return totalTaxes;
 	}
 
-	public void setTotalTaxes(Double totalTaxes) {
+	public void setTotalTaxes(BigDecimal totalTaxes) {
 		this.totalTaxes = totalTaxes;
 	}
 }

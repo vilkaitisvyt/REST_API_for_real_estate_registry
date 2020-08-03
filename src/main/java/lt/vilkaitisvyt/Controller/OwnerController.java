@@ -1,5 +1,6 @@
 package lt.vilkaitisvyt.Controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -19,11 +20,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lt.vilkaitisvyt.Dao.OwnerRepository;
 import lt.vilkaitisvyt.Exception.OwnerNotFoundException;
 import lt.vilkaitisvyt.Model.BuildingRecord;
 import lt.vilkaitisvyt.Model.Owner;
 import lt.vilkaitisvyt.Model.TotalYearlyTaxes;
-import lt.vilkaitisvyt.Repository.OwnerRepository;
 import lt.vilkaitisvyt.Util.OwnerModelAssembler;
 
 @RestController
@@ -58,11 +59,11 @@ public class OwnerController {
 	    Owner owner =  ownerRepository.findById(id)
 	      .orElseThrow(() -> new OwnerNotFoundException(id));
 	    
-	    Double taxes = 0.0;
+	    BigDecimal taxes = new BigDecimal(0.0);
 	    
 	    for(BuildingRecord record: owner.getBuildingRecords()) {
 	    	if(record.getPropertyType() != null) {
-	    		taxes += record.getMarketValue() * (record.getPropertyType().getTaxRatePercentage() / 100);
+	    		taxes = taxes.add(record.getMarketValue().multiply(record.getPropertyType().getTaxRatePercentage().movePointLeft(2)));
 	    	}
 	    }
 	    

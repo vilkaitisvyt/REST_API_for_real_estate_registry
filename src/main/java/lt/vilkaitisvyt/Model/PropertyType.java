@@ -1,5 +1,6 @@
 package lt.vilkaitisvyt.Model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class PropertyType {
 	@Min(0)
 	@Max(100)
 	@NotNull(message="Tax rate cannot be missing or empty")
-	private Double taxRatePercentage;
+	private BigDecimal taxRatePercentage;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "propertyType", fetch = FetchType.LAZY)
@@ -42,7 +43,7 @@ public class PropertyType {
 		
 	}
 	
-	public PropertyType(String propertyType, Double taxRatePercentage) {
+	public PropertyType(String propertyType, BigDecimal taxRatePercentage) {
 		super();
 		this.propertyType = propertyType;
 		this.taxRatePercentage = taxRatePercentage;
@@ -56,11 +57,11 @@ public class PropertyType {
 		this.propertyType = propertyType;
 	}
 
-	public Double getTaxRatePercentage() {
+	public BigDecimal getTaxRatePercentage() {
 		return taxRatePercentage;
 	}
 
-	public void setTaxRatePercentage(Double taxRatePercentage) {
+	public void setTaxRatePercentage(BigDecimal taxRatePercentage) {
 		this.taxRatePercentage = taxRatePercentage;
 	}
 

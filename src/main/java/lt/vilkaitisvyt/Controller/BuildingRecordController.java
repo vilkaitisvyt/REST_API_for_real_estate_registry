@@ -21,6 +21,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lt.vilkaitisvyt.Dao.BuildingRecordRepository;
+import lt.vilkaitisvyt.Dao.OwnerRepository;
+import lt.vilkaitisvyt.Dao.PropertyTypeRepository;
 import lt.vilkaitisvyt.Exception.BuildingRecordNotFoundException;
 import lt.vilkaitisvyt.Exception.OwnerNotFoundException;
 import lt.vilkaitisvyt.Exception.PropertyTypeNotFoundException;
@@ -29,9 +32,6 @@ import lt.vilkaitisvyt.Model.Owner;
 import lt.vilkaitisvyt.Model.OwnerToBuildingRecord;
 import lt.vilkaitisvyt.Model.PropertyType;
 import lt.vilkaitisvyt.Model.PropertyTypeToBuildingRecord;
-import lt.vilkaitisvyt.Repository.BuildingRecordRepository;
-import lt.vilkaitisvyt.Repository.OwnerRepository;
-import lt.vilkaitisvyt.Repository.PropertyTypeRepository;
 import lt.vilkaitisvyt.Util.BuildingRecordModelAssembler;
 
 @RestController

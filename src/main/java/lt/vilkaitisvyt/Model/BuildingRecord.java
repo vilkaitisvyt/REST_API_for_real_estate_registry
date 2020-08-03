@@ -1,5 +1,7 @@
 package lt.vilkaitisvyt.Model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -33,7 +35,7 @@ public class BuildingRecord {
 	
 	@Min(0)
 	@NotNull(message="Value cannot be missing or empty")
-	private Double marketValue;
+	private BigDecimal marketValue;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "propertyType_id")
@@ -44,7 +46,7 @@ public class BuildingRecord {
 		
 	}
 	
-	public BuildingRecord(String adress, Integer sizeInSquareMeters, Double marketValue) {
+	public BuildingRecord(String adress, Integer sizeInSquareMeters, BigDecimal marketValue) {
 		super();
 		this.adress = adress;
 		this.sizeInSquareMeters = sizeInSquareMeters;
@@ -76,11 +78,11 @@ public class BuildingRecord {
 		this.sizeInSquareMeters = sizeInSquareMeters;
 	}	
 
-	public Double getMarketValue() {
+	public BigDecimal getMarketValue() {
 		return marketValue;
 	}
 
-	public void setMarketValue(Double marketValue) {
+	public void setMarketValue(BigDecimal marketValue) {
 		this.marketValue = marketValue;
 	}
 

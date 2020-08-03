@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import lt.vilkaitisvyt.Dao.PropertyTypeRepository;
 import lt.vilkaitisvyt.Exception.PropertyTypeNotFoundException;
 import lt.vilkaitisvyt.Model.PropertyType;
-import lt.vilkaitisvyt.Repository.PropertyTypeRepository;
 import lt.vilkaitisvyt.Util.PropertyTypeModelAssembler;
 
 @RestController
